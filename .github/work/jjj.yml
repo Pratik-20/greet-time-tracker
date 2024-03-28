@@ -1,0 +1,32 @@
+name: Update Text File
+
+on:
+  schedule:
+    - cron: "*/2 * * * *"
+
+jobs:
+  update-file:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # Adjust the Python version if needed
+
+      - name: Install dependencies (if any)
+        run: pip install -r requirements.txt
+
+      - name: Run Python script
+        run: python greet_time_tracker.py >> output.txt
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add output.txt
+          git commit -m "Update text file [skip ci]"
+          git push
