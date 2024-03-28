@@ -9,6 +9,7 @@ def main():
     # Write to the text file
     with open("output.txt", "a") as file:
         file.write(f"Hello, World! ({now:%Y-%m-%d %H:%M:%S})\n")
+    print("Script executed successfully!"
 
 if __name__ == "__main__":
     main()
