@@ -1,0 +1,30 @@
+# Update_Text_File.yml
+
+name: Update Text File
+
+on:
+  schedule:
+    - cron: "*/2 * * * *"  # Run every 2 minutes
+
+jobs:
+  run_script:
+    runs-on: windows-latest  # Ensure it runs on a Windows machine
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9  # Updated to Python 3.9
+
+      - name: Install dependencies (if any)
+        run: pip install -r requirements.txt  # Adjust as needed
+
+      - name: Execute Python script
+        run: python greet_time_tracker.py
+        id: script_output
+
+      - name: Save output to file
+        run: echo "${{ steps.script_output.outputs.stdout }}" > output.txt
