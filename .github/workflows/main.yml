@@ -1,6 +1,4 @@
-# MAIN.yml
-
-name: Python Application
+name: Create Progress File
 
 on:
   push:
@@ -9,15 +7,19 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
-      - name: Run Python script
+      - name: List files in the repository
+        run: ls -la
+
+      - name: Run Python Script
         run: python hello.py
