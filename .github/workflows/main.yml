@@ -2,7 +2,7 @@ name: Update Text File
 
 on:
   schedule:
-    - cron: '*/15 6 * * *'  # Run every 59 minutes
+    - cron: '*/45 6 * * *'  # Run every 59 minutes
 
 jobs:
   run_script:
@@ -17,7 +17,9 @@ jobs:
         with:
           python-version: 3.9  # Use Python 3.9
 
-      #- name: Install dependencies (if any)
+      - name: Install dependencies (if any)
+        run: requirements.txt  # Adjust as needed
+
         #run: pip install -r requirements.txt  # Adjust as needed
 
       - name: Execute Python script
