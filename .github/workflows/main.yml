@@ -2,7 +2,7 @@ name: Update Text File
 
 on:
   schedule:
-    - cron: '*/59 * * * *'  # Run every 59 minutes
+    - cron: '*/15 6 * * *'  # Run every 59 minutes
 
 jobs:
   run_script:
