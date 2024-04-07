@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '*/2 * * * *' # Run every 2 minutes
 
 jobs:
   build:
@@ -14,12 +16,16 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: 3.9
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
       - name: List files in the repository
         run: ls -la
 
       - name: Run Python Script
-        run: python hello.py
+        run: python Github_Sheet_update.py
+
