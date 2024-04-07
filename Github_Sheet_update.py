@@ -1,19 +1,17 @@
-# create_progress_file.py
+import gspread
 
-def create_progress_file():
-    filename = "progress.txt"
-    lines = [
-        "Step 1: Initializing the process",
-        "Step 2: Downloading data",
-        "Step 3: Processing data",
-        "Step 4: Finalizing",
-    ]
+# Load credentials from a JSON file (replace with your own file path)
+gc = gspread.service_account(filename="github-actions-py1-b1b85f37d6c1.json")
 
-    with open(filename, "w") as file:
-        for line in lines:
-            file.write(line + "\n")
+# Open the Google Sheet named "Github Action"
+wks = gc.open("Github Action").sheet1
 
-    print(f"Progress file '{filename}' created successfully!")
+# Read the existing data from the first column (column A)
+existing_data = wks.col_values(1)
 
-if __name__ == "__main__":
-    create_progress_file()
+# Add "Helloworld" to the next row
+next_row = len(existing_data) + 1
+wks.update(f'A{next_row}', [["Helloworld"]])
+
+# Print the updated data
+print(f"'Helloworld' added to row {next_row} in column A.")
